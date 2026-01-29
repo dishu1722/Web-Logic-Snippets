@@ -91,29 +91,6 @@ The system integrates directly with WooCommerce so users can add selected items 
 
 ---
 
-## 🗂️ Project Folder Structure (Recommended for GitHub)
-<pre>```
-Bedding Bed Linen/
-├── themes/
-│   └── hello-elementor-child-theme/
-│       ├── functions.php
-│       ├── style.css
-│       ├── js/
-│       │   ├── linen-calculator.js
-│       │   ├── hire-checkout.js
-│       │   └── scripts.js
-│       └── css/
-│           └── linen-calculator.css
-├── screenshot-previews/
-│   ├── homepage.png
-│   ├── calculator.png
-│   ├── checkout.png
-│   └── mobile-view.png
-├── README.md
-└── .gitignore
-```</pre>
----
-
 ## ⌨️ Code Highlight: AJAX Add-to-Cart Logic
 To bridge the gap between the custom JS calculator and the WooCommerce core, I developed a custom AJAX handler:
 
