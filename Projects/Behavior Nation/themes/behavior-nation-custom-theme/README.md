@@ -1,5 +1,7 @@
 # Behavior Nation - Custom Enterprise WordPress Theme
 
+**Live Project:** [[https://beddingbedlinen.com.au](https://www.behaviornation.com)]  
+
 ## 🏥 Project Overview
 Developed a high-performance, custom-coded WordPress theme for **Behavior Nation**, an ABA (Applied Behavior Analysis) service provider. The project focused on creating an accessible, resource-heavy platform for parents and healthcare professionals, requiring complex information architecture and interactive UI components.
 
