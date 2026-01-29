@@ -80,5 +80,28 @@ jQuery(document).ready(function($) {
             $(this).parent().find('label').addClass('active-tab');
         }
     });
+
+
+/* ============================================================
+   5. Job Flip Logic
+   ============================================================ */
+
+   // Open Job Description (Flip to Back)
+    $('.job-desc-btn').on('click', function() {
+        var $parent = $(this).closest('.job-single-box');
+        
+        $parent.find('.job-front').fadeOut(300, function() {
+            $parent.find('.job-back').fadeIn(300);
+        });
+    });
+
+    // Close Job Description (Return to Front)
+    $('.job-close').on('click', function() {
+        var $parent = $(this).closest('.job-single-box');
+        
+        $parent.find('.job-back').fadeOut(300, function() {
+            $parent.find('.job-front').fadeIn(300);
+        });
+    });
 });
 
