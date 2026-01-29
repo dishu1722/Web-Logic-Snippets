@@ -68,5 +68,17 @@ jQuery(document).ready(function($) {
         $('.filteration-blogs .box').hide();
         $('.filteration-blogs .box').eq(filterIndex).stop().fadeIn(500);
     });
+
+
+ /* ============================================================
+   4. Customizing Search & Filter Pro Radio Buttons to look like UI Tabs
+   ============================================================ */
+
+   $('.sf-field-category input[type="radio"]').on('change', function() {
+        $('.sf-label-radio').removeClass('active-tab');
+        if($(this).is(':checked')) {
+            $(this).parent().find('label').addClass('active-tab');
+        }
+    });
 });
 
