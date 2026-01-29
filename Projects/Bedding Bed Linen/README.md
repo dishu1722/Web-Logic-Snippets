@@ -56,8 +56,8 @@ The system integrates directly with WooCommerce so users can add selected items 
 - Mobile-responsive
 - Floating "Add to Cart" footer bar
 - Custom AJAX call to add selected items to WooCommerce cart
-- Nonce security implemented
-- Error handling included
+- **Security & Integrity:** Implemented WordPress Nonces for AJAX request verification to prevent CSRF attacks.
+- **Error Handling:** Robust front-end and back-end validation to ensure accurate pricing calculations and data sanitization.
 - Products created in WooCommerce and connected to calculator
 
 ---
@@ -114,6 +114,25 @@ Bedding Bed Linen/
 ```</pre>
 ---
 
+## ⌨️ Code Highlight: AJAX Add-to-Cart Logic
+To bridge the gap between the custom JS calculator and the WooCommerce core, I developed a custom AJAX handler:
+
+```javascript
+// Example of the logic used to sync calculator selections with the cart
+$.ajax({
+    url: wc_add_to_cart_params.ajax_url,
+    type: 'POST',
+    data: {
+        action: 'linen_hire_add_to_cart',
+        product_data: selectedItems,
+        security: custom_nonce
+    },
+    success: function(response) {
+        // Handle UI update and floating cart bar refresh
+    }
+}); 
+```
+
 ## 📸 Screenshots
 Homepage:  
 ![Homepage](screenshot-previews/Homepage.png)
@@ -141,7 +160,7 @@ Cart Page + Cart Icon with Counter in Header:
 
 ---
 
-## 🧑‍💻 My Role & Responsibilities
+## 🧑‍💻 Key Technical Contributions
 - Designed all main pages using Elementor
 - Built entire Linen Hire Calculator system (PHP, JS, CSS)
 - Developed custom PHP hooks, AJAX calls, and JS logic
