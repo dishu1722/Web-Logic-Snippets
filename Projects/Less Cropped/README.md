@@ -2,6 +2,8 @@
 
 A comprehensive WooCommerce customization for an Australian minimal fashion brand. This project focused on refining the user journey through advanced product filtering logic, layout reorganization, and mobile-first media optimization.
 
+**Live Project:** [https://lesscropped.com.au](https://lesscropped.com.au) 
+
 ## 🛠️ Key Technical Features
 
 ### **1. Advanced Filter & Variation Logic (PHP/WooCommerce)**
