@@ -2,7 +2,7 @@
 
 A specialized WooCommerce implementation for an Australian event equipment rental business. This project involved re-engineering the standard e-commerce purchase flow into a high-performance rental and booking engine.
 
-**Live Project:** [[https://www.buffethire.com](https://buffethire.com.au)]  
+**Live Project:** [https://www.buffethire.com](https://buffethire.com.au)
 
 ## 🛠️ Key Technical Features
 
