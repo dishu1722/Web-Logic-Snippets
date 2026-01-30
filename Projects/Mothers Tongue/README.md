@@ -48,7 +48,7 @@ About Mobile Version:
 ![About Mobile Version](Screenshots/About-mob.png)
 
 Our Method:
-![Our Method](Screenshots/Our%20Method.png)
+![Our Method](Screenshots/Our%20method.png)
 
 Our Method Mobile Version:  
 ![Our Method Mobile Version](Screenshots/Our-method-mob.png)
