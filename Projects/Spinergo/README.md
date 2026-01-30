@@ -41,5 +41,5 @@ Single Product:
 ![Single Product](screenshot-previews/Single%20Product.png)
 
 Cart:  
-![Cart](Screenshots/Cart.png)
+![Cart](screenshot-previews/Cart.png)
 
