@@ -2,6 +2,8 @@
 
 A vibrant, custom-built WordPress website designed for a children's language learning platform. This project involved high-fidelity UI replication of a reference site architecture while maintaining a unique brand identity through custom illustrations and a specific color palette.
 
+**Live Project:** [https://motherstongue.com.au](https://motherstongue.com.au)
+
 ## 🎨 Design & UX Strategy
 
 ### **1. High-Fidelity Design Execution**
@@ -30,3 +32,24 @@ The challenge was to make a complex educational method feel simple and fun. I ac
 * **Front-End:** HTML5, CSS3, JavaScript, jQuery
 * **Forms & Popups:** Contact Form 7, Elementor Popup Builder
 * **SEO:** Yoast SEO Plugin
+
+## 📸 Screenshots
+
+Home:  
+![Home](Screenshots/Home.png)
+
+Home Mobile Version:  
+![Home Mobile Version](Screenshots/Home-mob.png)
+
+About:
+![About](Screenshots/About.png)
+
+About Mobile Version:  
+![About Mobile Version](Screenshots/About-mob.png)
+
+Our Method:
+![Our Method](Screenshots/Our%20Method.png)
+
+Our Method Mobile Version:  
+![Our Method Mobile Version](Screenshots/Our-method-mob.png)
+
