@@ -112,28 +112,28 @@ $.ajax({
 
 ## 📸 Screenshots
 Homepage:  
-![Homepage](/screenshot-previews/Homepage.png)
+![Homepage](screenshot-previews/Homepage.png)
 
 About:
-![About](/screenshot-previews/About.png)
+![About](screenshot-previews/About.png)
 
 Contact:
-![Contact](/screenshot-previews/Contact.png)
+![Contact](screenshot-previews/Contact.png)
 
 Cost Calculator:  
-![Cost Calculator](/screenshot-previews/Cost-Calculator.png)
+![Cost Calculator](screenshot-previews/Cost-Calculator.png)
 
 Mobile Cost Calculator View:  
-![Mobile View](/screenshot-previews/Cost-Calculator-mobile.png)
+![Mobile View](screenshot-previews/Cost-Calculator-mobile.png)
 
 FAQ:  
-![FAQ](/screenshot-previews/FAQ.png)
+![FAQ](screenshot-previews/FAQ.png)
 
 Checkout Page with Custom Fields:  
-![Checkout](/screenshot-previews/Checkout.png)
+![Checkout](screenshot-previews/Checkout.png)
 
 Cart Page + Cart Icon with Counter in Header:  
-![Cart](/screenshot-previews/Cart.png)
+![Cart](screenshot-previews/Cart.png)
 
 ---
 
