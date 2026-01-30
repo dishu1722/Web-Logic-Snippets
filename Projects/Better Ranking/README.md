@@ -2,7 +2,7 @@
 
 A modern, high-performance website build focused on organic growth and user engagement. This project involved designing the core site architecture—including the Home, About, and Blog pages—using the Blocksy Builder to ensure a lightweight, SEO-optimized foundation.
 
-**Live Project:** [[https://betterranking.co.uk](https://betterranking.co.uk)]  
+**Live Project:** [https://betterranking.co.uk](https://betterranking.co.uk)
 
 ## 🛠️ Key Technical Features
 
