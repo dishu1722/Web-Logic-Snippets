@@ -33,16 +33,16 @@ Homepage:
 ![Homepage](Screenshots/Home.png)
 
 About:
-![Service](screenshot-previews/Service.png)
+![Service](screenshots/Service.png)
 
 Resources:
-![Resources](screenshot-previews/Resources.png)
+![Resources](screenshots/Resources.png)
 
 Careers:
-![Careers](screenshot-previews/Careers.png)
+![Careers](screenshots/Careers.png)
 
 Blog:
-![Blog](screenshot-previews/Blog.png)
+![Blog](screenshots/Blog.png)
 
 ---
 *Developed as a lead Software Developer at [Stark Edge].*
