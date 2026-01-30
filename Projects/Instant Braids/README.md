@@ -29,3 +29,10 @@ The primary challenge was moving away from a "generic" store look toward a high-
 * **Design & Building:** Elementor, Custom CSS3, HTML5
 * **Interactivity:** JavaScript / jQuery for variation selection and UI toggles
 * **Methodology:** UI/UX Benchmarking, Responsive Design
+
+## 📸 Screenshots
+Home:  
+![Home](Screenshots/Home.png)
+
+Single Product:
+![Single Product](Screenshots/Single%20Product.png)
