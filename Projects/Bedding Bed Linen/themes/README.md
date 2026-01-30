@@ -112,7 +112,7 @@ $.ajax({
 
 ## 📸 Screenshots
 Homepage:  
-![Homepage](./screenshot-previews/Homepage.png)
+![Homepage](../screenshot-previews/Homepage.png)
 
 About:
 ![About](screenshot-previews/About.png)
