@@ -29,3 +29,13 @@ The goal for **Better Ranking** was to create a site that was as fast as it was 
 * **Theme/Builder:** Blocksy & Gutenberg Blocks
 * **Design Focus:** Typography, Visual Hierarchy, Mobile-First Design
 * **SEO Tools:** Metadata structure, Header Hierarchy, Asset Optimization
+
+## 📸 Screenshots
+Home:  
+![Home](Screenshots/Home.png)
+
+About:
+![About](Screenshots/About%20us.png)
+
+Blog:
+![Blog](Screenshots/Blog.png)
