@@ -28,3 +28,19 @@ For a minimal brand like **Less Cropped**, the interface needed to be as clean a
 * **Platform:** WordPress & WooCommerce
 * **Advanced Tools:** Advanced Custom Fields (ACF), Swiper.js (Gallery Logic), Elementor
 * **Design:** Responsive Web Design, Mobile-First Optimization
+
+## 📸 Screenshots
+Home:  
+![Home](Screenshots/Home%20Page.png.jpeg)
+
+Home Mob Version:
+![Home Mobile Version](Screenshots/Home-mob.png)
+
+Product Category:
+![Product Category](Screenshots/Product%20Category%20Page.png)
+
+Single Product:
+![Single Product](Screenshots/Single%20Product.png)
+
+Single Product Mobile Version:
+![Single Product Mobile Version](Screenshots/Single%20Product%20mob.png)
