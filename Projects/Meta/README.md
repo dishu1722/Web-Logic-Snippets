@@ -31,3 +31,29 @@ The challenge was to create a site for an SEO agency that practiced what it prea
 * **Page Building:** Gutenberg Block Editor + Stackable Blocks
 * **Form Engine:** WPForms
 * **Development:** HTML5, CSS3, Responsive Design Principles
+
+## 📸 Screenshots
+
+Home:  
+![Home](Screenshots/Home.png)
+
+Home Mobile Version:
+![Home Mobile Version](Screenshots/Home-mob.png)
+
+Single Post:
+![Single Post](Screenshots/Single%20post.png)
+
+Single Post Mobile Version:
+![Single Post Mobile Version](Screenshots/Single%20Post%20mob.png)
+
+Blog:
+![Blog](Screenshots/Blog.png)
+
+Blog Mobile Version:
+![Blog Mobile Version](Screenshots/Blog-mob.png)
+
+Contact:
+![Contact](Screenshots/Contact%20us.png)
+
+Contact Mobile Version:
+![Contact Mobile Version](Screenshots/Contact-Us-mob.png)
