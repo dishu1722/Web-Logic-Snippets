@@ -31,10 +31,10 @@ To meet the client's business needs, I modified the standard checkout flow to ha
 
 ## 📸 Screenshots
 Home v1:  
-![Home v1](Screenshots/Home-v1.png)
+![Home v1](Screenshots/Home v1.png)
 
 Home v2:  
-![Home v2](Screenshots/Home-v2.png)
+![Home v2](Screenshots/Home v2.png)
 
 Home Mob:  
 ![Home Mob](Screenshots/Home-mob.png)
