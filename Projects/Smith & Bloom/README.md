@@ -30,3 +30,26 @@ E-commerce for florists requires specific "gifting" features. I addressed these 
 * **E-commerce:** WooCommerce + Stripe Gateway
 * **Languages:** PHP, JavaScript (ES6), jQuery, CSS3
 * **Tools:** Elementor, WPForms, Generate Child Theme
+
+## 📸 Screenshots
+
+Home v1:  
+![Home v1](Screenshots/Home%20v1.png)
+
+Home v2:  
+![Home v2](Screenshots/Home%20v2.png)
+
+Postcode Check functionality:  
+![Postcode Check functionality](Screenshots/Postcode%20Check.png)
+
+About:  
+![About](Screenshots/About-Us.png)
+
+Contact:  
+![Contact](Screenshots/Contact-Us.png)
+
+Category:  
+![Category](Screenshots/Category.png)
+
+Single Product:  
+![Single Product](Screenshots/Single%20Product.png)
