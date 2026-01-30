@@ -52,16 +52,16 @@ Category Mob:
 ![Category Mob](Screenshots/Category-mob.png)
 
 Single Product v1:  
-![Single Product v1](Screenshots/Single-Product.png)
+![Single Product v1](Screenshots/Single%20Product.png)
 
 Single Product v2:  
-![Single Product v2](Screenshots/Single-Product-v2.png)
+![Single Product v2](Screenshots/Single%20Product%20v2.png)
 
 My Account:  
-![My Account](Screenshots/My-Account.png)
+![My Account](Screenshots/My%20Account.png)
 
 My Account Mob:  
-![My Account Mob](Screenshots/My-Account-mob.png)
+![My Account Mob](Screenshots/My%20Account%20mob.png)
 
 Contact:  
 ![Contact](Screenshots/Contact-Us.png)
