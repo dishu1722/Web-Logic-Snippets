@@ -28,5 +28,21 @@ Developed a high-performance, custom-coded WordPress theme for **Behavior Nation
 **The Challenge:** The client had hundreds of legal and educational resources that were difficult for parents to navigate on mobile.
 **The Solution:** I designed a "Tabbed Filter" interface that reduced the number of clicks needed to find a document by 60%. I also implemented a "Job-Back" description toggle to keep the Careers page concise and professional.
 
+## 📸 Screenshots
+Homepage:  
+![Homepage](Screenshots/Home.png)
+
+About:
+![Service](screenshot-previews/Service.png)
+
+Resources:
+![Resources](screenshot-previews/Resources.png)
+
+Careers:
+![Careers](screenshot-previews/Careers.png)
+
+Blog:
+![Blog](screenshot-previews/Blog.png)
+
 ---
 *Developed as a lead Software Developer at [Stark Edge].*
