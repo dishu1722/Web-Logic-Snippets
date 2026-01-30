@@ -44,7 +44,7 @@ Single Post:
 ![Single Post](Screenshots/Single%20post.png)
 
 Single Post Mobile Version:
-![Single Post Mobile Version](Screenshots/Single%20Post%20mob.png)
+![Single Post Mobile Version](Screenshots/Single%20Post-mob.png)
 
 Blog:
 ![Blog](Screenshots/Blog.png)
