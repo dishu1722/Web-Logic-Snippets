@@ -28,3 +28,41 @@ To meet the client's business needs, I modified the standard checkout flow to ha
 * **Languages:** PHP, JavaScript (ES6), jQuery, CSS3
 * **Platform:** WordPress & WooCommerce
 * **Tools:** Elementor, Bookings for WooCommerce, Stripe Gateway
+
+## 📸 Screenshots
+Home v1:  
+![Home v1](Screenshots/Home-v1.png)
+
+Home v2:  
+![Home v2](Screenshots/Home-v2.png)
+
+Home Mob:  
+![Home Mob](Screenshots/Home-mob.png)
+
+Packages v1:  
+![Packages v1](Screenshots/Packages.png)
+
+Packages:  
+![Packages v2](Screenshots/Packages-v2.png)
+
+Category:  
+![Category](Screenshots/Category.png)
+
+Category Mob:  
+![Category Mob](Screenshots/Category-mob.png)
+
+Single Product v1:  
+![Single Product v1](Screenshots/Single-Product.png)
+
+Single Product v2:  
+![Single Product v2](Screenshots/Single-Product-v2.png)
+
+My Account:  
+![My Account](Screenshots/My-Account.png)
+
+My Account Mob:  
+![My Account Mob](Screenshots/My-Account-mob.png)
+
+Contact:  
+![Contact](Screenshots/Contact-Us.png)
+
