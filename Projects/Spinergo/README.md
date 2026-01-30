@@ -34,3 +34,12 @@ Standard WooCommerce setups struggle with complex product options. I bridged thi
 * **Backend:** PHP (WooCommerce Hooks & Filters)
 * **Frontend:** Vanilla JavaScript (ES6), jQuery, CSS3 (BEM-inspired)
 * **Logic:** JSON Data Handling, DOM Mutation, Cart Object Manipulation
+
+## 📸 Screenshots
+
+Single Product:  
+![Single Product](screenshot-previews/Single%20Product.png)
+
+Cart:  
+![Cart](Screenshots/Cart.png)
+
