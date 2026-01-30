@@ -2,6 +2,8 @@
 
 A technical deep-dive into the customization of a high-end ergonomic seating store built with **Bricks Builder**. This project focused on creating a bespoke "Product Configurator" experience, integrating dynamic metadata into swatches and engineering a custom product add-on system from the ground up.
 
+**Live Project:** [https://spinergo.kinsta.cloud/produkt/ergonomicka-stolicka-business/](https://spinergo.kinsta.cloud/produkt/ergonomicka-stolicka-business/)
+
 ## 🛠️ Key Technical Features
 
 ### **1. Dynamic Swatch Metadata Engine (PHP & JS)**
