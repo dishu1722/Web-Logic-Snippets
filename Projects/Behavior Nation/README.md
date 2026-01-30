@@ -32,17 +32,17 @@ Developed a high-performance, custom-coded WordPress theme for **Behavior Nation
 Homepage:  
 ![Homepage](Screenshots/Home.png)
 
-About:
-![Service](screenshots/Service.png)
+Service:
+![Service](Screenshots/Service.png)
 
 Resources:
-![Resources](screenshots/Resources.png)
+![Resources](Screenshots/Resources.png)
 
 Careers:
-![Careers](screenshots/Careers.png)
+![Careers](Screenshots/Careers.png)
 
 Blog:
-![Blog](screenshots/Blog.png)
+![Blog](Screenshots/Blog.png)
 
 ---
 *Developed as a lead Software Developer at [Stark Edge].*
