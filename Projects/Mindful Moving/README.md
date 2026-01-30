@@ -2,6 +2,8 @@
 
 A high-stakes performance optimization project for a New Jersey-based moving service. The focus was on drastically improving **Core Web Vitals**, specifically targeting **Total Blocking Time (TBT)** and **Cumulative Layout Shift (CLS)** to enhance user retention and search engine rankings.
 
+**Live Project:** [https://mindfulmoving.com](https://mindfulmoving.com)
+
 ## 📈 Performance Results (Verified via PageSpeed Insights)
 
 | Metric | Desktop (Post-Optimization) | Mobile (Post-Optimization) |
