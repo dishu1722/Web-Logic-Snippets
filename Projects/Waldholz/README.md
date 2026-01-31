@@ -2,6 +2,8 @@
 
 A high-fidelity real estate platform designed for luxury land and forest acquisitions. This project bridge the gap between high-end Figma prototyping and custom WordPress development, featuring bespoke interactive components and a data-driven property engine.
 
+**Live Project:** [https://waldholz.de](https://waldholz.de)
+
 ## 🛠️ Technical Implementation & Innovation
 
 ### **1. Advanced Map Interactivity (JavaScript/SVG)**
@@ -29,3 +31,23 @@ Luxury real estate requires a unique balance of data and atmosphere. I achieved 
 * **Design:** Figma, Adobe Photoshop
 * **Development:** PHP (CPT & Shortcodes), JavaScript (jQuery), CSS3 (Clip-path/Flex)
 * **WordPress Tools:** Elementor, MapGeo Plugin, Owl Carousel 2
+
+## 📸 Screenshots
+
+Home:  
+![Home](Screenshots/home.png)
+
+About:  
+![About](Screenshots/about.png)
+
+For Buyers:  
+![For Buyers](Screenshots/for-buyers.png)
+
+For Sellers:  
+![For Sellers](Screenshots/for-sellers.png)
+
+References:  
+![References](Screenshots/References.png)
+
+Contact:  
+![Contact](Screenshots/Contact.png)
