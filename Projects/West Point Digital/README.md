@@ -27,3 +27,17 @@ For a technology company, the website must act as a proof of competence. I achie
 * **Interactivity:** Owl Carousel
 * **Multilingual:** WPML Plugin
 * **Forms:** Contact Form 7
+
+## 📸 Screenshots
+
+About:  
+![About](Screenshots/About-Page.png)
+
+Case Study:  
+![Case Study](Screenshots/Case-Page.png)
+
+Single Case Study:  
+![Single Case Study](Screenshots/Single-Case-Page.png)
+
+Services:  
+![Service](Screenshots/Service-Page.png)
