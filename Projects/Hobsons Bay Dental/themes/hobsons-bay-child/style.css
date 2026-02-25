@@ -1,0 +1,776 @@
+/*
+ Theme Name: Hobsons Bay Child
+ Theme URI: https://www.hobsonsbaydental.com.au/
+ Description: Child theme for hobsons-bay3 with hero image + overlay, tabbed forms, and safe customizations.
+ Author: You
+ Version: 1.0.1
+ Template: hobsons-bay3
+*/
+
+/* ===== Variables ===== */
+:root{
+  --heroOverlayH: 20vh; /* desktop overlay height */
+  --heroHeight: 85vh;   /* desktop hero height */
+}
+
+/* Make sure the theme uses full height layout */
+html, body { height: 100%; }
+
+
+/* ==== Header ======== */
+.social-icon-new::before {
+    font-family: FontAwesome;
+    color: #143b48;
+    font-size: 14px;
+    text-align: center !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.instagram-icon::before {
+    content: "\f16d";
+}
+.youtube-icon::before {
+    content: "\f16a";
+}
+
+
+
+/* ===== Hero section ===== */
+.home-hero{
+  position: relative;
+  background-size: cover;
+  background-position: center top;
+  height: var(--heroHeight);
+  min-height: 540px;
+  color: #fff;
+  display: flex;
+  align-items: flex-end; /* keep overlay on bottom */
+  margin: 0;
+  padding: 5px 15px 0px;
+}
+.home-hero .overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    background: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid rgba(1, 162, 218, 1);
+    border-bottom-width: 0;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.home-hero .hero-content{
+  text-align: center;
+  width: 100%;
+  max-width: 1200px; /* spread text wider */
+  margin: 0 auto;
+  padding: 0;
+}
+
+.home-hero h2{
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.home-hero p{
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.55;
+  margin: 0 0 8px 0;
+}
+
+.home-hero .button{
+  margin-top: 6px;
+}
+body.home .main-content-section {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Clinics */
+.page-heading .entry-title {
+    padding-top: 2em;
+}
+.clinic-list .block-grid-item:first-child {
+    padding-right: 30px;
+}
+.clinic-list .block-grid-item a {
+    border-radius: 17px;
+}
+.page-template-template-about-clinic .entry-content p:first-child {
+    background-color: #f4f4f4;
+    padding: 18px;
+    margin-bottom: 30px;
+}
+.clinic-list .block-desc {
+    font-weight: 500;
+}
+.clinic-list .block-grid-title .button {
+    border: 2px solid #fff;
+    display: inline-block !important;
+    padding: 8px;
+    text-decoration: none;
+    line-height: normal;
+    font-weight: 600;
+    background-color: #fff;
+    color: #00A3DA;
+    transition: 0.3s ease-in-out all;
+}
+.clinic-list .block-grid-title .title {
+    font-weight: 600;
+}
+
+/* Single Clinics */
+.single-clinic .entry-content a img {
+    border-radius: 18px;
+    height: 200px;
+    object-fit: cover;
+}
+.clinic-info.clinic-opening-time, .clinic-info.getting-here {
+    border: unset;
+    background-color: #f4f4f4;
+    padding: 40px;
+    margin-bottom: 2em;
+    width: auto;
+
+}
+.clinic-info.practitioners-section {
+    border: unset;
+    margin-bottom: 3rem;
+    padding-top: 0;
+}
+
+/* Contact */
+.form-style .tab-container .tab-buttons .tab-btn {
+    font-size: 18px;
+    color: #000;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 2px solid #f1f1f1;
+    margin-bottom: -2px;
+    background-color: #f1f1f1;
+    font-weight: 400;
+    width: 30%;
+    border-radius: 10px;
+}
+.form-style .tab-container .tab-buttons .tab-btn.active {
+  background-color: #00A3DA;
+  color: #fff;
+  border-color: #00A3DA;
+}
+.form-style .tab-container .tab-buttons .tab-btn:hover{
+  color: #00A3DA;
+  border-color: #00A3DA;
+  background-color: transparent;
+}
+.form-style .tab-container .tab-buttons {
+    margin-bottom: 35px;
+    justify-content: center;
+}
+.form-style .tab-container .tab-content form textarea, 
+.form-style form input[type="text"], .form-style form input[type="email"],
+.form-style form .ff-el-input--content select.ff-el-form-control,
+.form-style.patient-form form textarea
+ {
+    border: unset !important;
+    border-bottom: 1px solid #01a2da !important;
+    background-color: transparent;
+    border-radius: unset;
+    padding: 0;
+    height: 30px;
+    color: #000;
+    font-weight: 300;
+}
+.form-style .tab-container .tab-content form .ff-el-input--label {
+    line-height: normal;
+    margin-bottom: 8px;
+}
+.form-style form .ff-el-input--label > label {
+    color: #2a2a2a;
+    font-weight: 600;
+    font-size: 15px;
+}
+.form-style .tab-container .tab-content form .ff-el-input--content {
+    display: flex;
+    flex-wrap: wrap;
+}
+.form-style .tab-container .tab-content form .ff-el-form-check {
+    margin-bottom: 0;
+    width: 30% !important;
+}
+.form-style .tab-container .tab-content form .ff-el-form-check label {
+    color: #000;
+  font-weight: 300;
+}
+.form-style form input[type="text"]:focus, 
+.form-style input[type="email"]:focus, 
+.form-style .tab-container .tab-content form textarea:focus,
+.form-style.patient-form form textarea:focus {
+box-shadow: unset;
+}
+.form-style form.frm-fluent-form button.ff-btn-submit{
+    background-color: #01a2da;
+}
+.form-style .tab-container .tab-content form .ff-el-input--content .error.text-danger {
+  width: 100%;
+}
+.form-style form .ff-t-cell label {
+    font-weight: 500;
+}
+
+/* Patient page */
+.patient-form form .ff-el-group .ff-el-input--content .ff-el-form-check {
+    width: 30% !important;
+    margin-bottom: 0;
+}
+.patient-form form fieldset hr {
+    margin-top: 10px;
+}
+.patient-form form .ff-el-section-break {
+    background-color: #f1f1f1;
+    color: #01a2da;
+    font-size: 12px;
+    padding: 0px 15px;
+    margin-top: 30px;
+}
+.patient-form form .ff-el-section-break hr {
+    display: none;
+}
+.patient-form form .ff-el-section-break {
+    background-color: #f1f1f1;
+    color: #01a2da;
+    font-size: 11px;
+    padding: 0px 11px 5px;
+    margin-top: 30px;
+}
+.form-style.patient-form form.frm-fluent-form button.ff-btn-submit {
+    min-width: auto;
+}
+/* In the Press page */
+.step-box-outer, .team-list, .service-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.step-box-outer .single-step-box, 
+.team-list .team-item,
+.service-list .grid-block-item
+ {
+    margin: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 27px 25px;
+    background-image: linear-gradient(29deg, rgba(1, 162, 218, 0.12), rgba(242, 242, 242, 0.57));
+}
+.single-step-box:first-child {
+    margin-left: 0;
+}
+.videobox-block {
+    position: relative;
+}
+.videobox-block img {
+    height: 290px;
+    object-fit: cover;
+    width: 100%;
+    object-position: top;
+}
+.video-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #01a2da;
+    padding: 17px 0px 0;
+    line-height: normal;
+    min-height: 55px;
+    text-align: center;
+}
+.videobox-block i.fa-play {
+    background: rgba(0, 163, 218, .8);
+    color: #fff;
+    font-size: 27px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+.custom-popup-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.75);
+    display: none;
+    z-index: 100;
+}
+.custom-popup-box .img-pop-outer {
+    height: auto;
+    max-width: 450px;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.img-pop-inner {
+    width: 100%;
+    position: relative;
+    height: 100%;
+}
+.videobox-block img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+    object-position: top;
+    border-radius: 15px;
+}
+.img-pop-inner img {
+    height: 100%;
+}
+.img-pop-inner i {
+    position: absolute;
+    right: -13px;
+    top: -16px;
+    font-size: 34px;
+    background: url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXBAMAAAASBMmTAAAAAXNSR0IB2cksfwAAABtQTFRFAAAA////////////////////////////////600+wgAAAAl0Uk5TAJDlgYKPc8nKkbK1ogAAAHFJREFUeJxN0MsNgCAQBNDx5tFsBbrJBo+WQKiAEui/Ct1v5AT7QmYA9CDW6GCJ/cYnBk8/EK9vIAGXTabDYSMpCHJwSjBKUGoFSgXAzg1/mag7dzXUDErSjGzo4UEeHhThRtnKaGS4vrRa6R9Qr99ZLxGhD43TkLh4AAAAAElFTkSuQmCC) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    color: transparent;
+    cursor: pointer;
+}
+.wistia-fancybox .fancybox-opened {
+    z-index: 1003;
+}
+.wistia-fancybox .fancybox-wrap {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1002;
+}
+.wistia-fancybox .fancybox-outer {
+    padding: 0px;
+    margin: 0px;
+    color: rgb(68, 68, 68);
+    text-shadow: none;
+}
+.wistia-fancybox .fancybox-image, .wistia-fancybox .fancybox-iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: top;
+}
+.fancybox-item.fancybox-close {
+    top: -17px;
+    z-index: 99;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXBAMAAAASBMmTAAAAAXNSR0IB2cksfwAAABtQTFRFAAAA////////////////////////////////600+wgAAAAl0Uk5TAJDlgYKPc8nKkbK1ogAAAHFJREFUeJxN0MsNgCAQBNDx5tFsBbrJBo+WQKiAEui/Ct1v5AT7QmYA9CDW6GCJ/cYnBk8/EK9vIAGXTabDYSMpCHJwSjBKUGoFSgXAzg1/mag7dzXUDErSjGzo4UEeHhThRtnKaGS4vrRa6R9Qr99ZLxGhD43TkLh4AAAAAElFTkSuQmCC") center center no-repeat !important;
+    box-shadow: none !important;
+    position: absolute !important;
+}
+.wistia-fancybox .fancybox-close {
+    height: 31px;
+    right: -15px;
+    top: -15px;
+    width: 31px;
+    cursor: pointer;
+}
+.wistia-fancybox #fancybox-overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    display: none;
+    z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+/* Service page */
+.page-template-template-services .service-list .display-table img {
+    max-height: 90px;
+}
+.service-list .image-wrapper img {
+    height: 100px;
+    width: auto;
+    object-fit: unset;
+    object-position: unset;
+    border-radius: 5px;
+}
+.service-list .image-wrapper {
+    text-align: center;
+}
+.service-list .grid-block-item .video-title {
+    min-height: 40px;
+}
+.service-list .grid-block-item {
+    position: relative;
+}
+.service-list .grid-block-item::before {
+    position: absolute;
+    content: " ";
+    top: 89%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100%;
+    text-align: center;
+    background-color: #01a2da;
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+}
+.service-list .grid-block-item:hover::before {
+    opacity: 1;
+    top: 69%;
+    padding: 33px 5px;
+}
+.service-list .grid-block-item a::before {
+     position: absolute;
+    content: "Further Information";
+    top: 89%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+     transition: all 0.3s ease-in-out;
+    font-size: 16px;
+}
+.service-list .grid-block-item:hover a::before{
+opacity: 1;
+}
+/* Single service */
+.single-service .entry-content img.alignright {
+    border-radius: 15px;
+    padding: 27px 25px;
+    background-image: linear-gradient(29deg, rgba(1, 162, 218, 0.12), rgba(242, 242, 242, 0.57));
+    width: 220px;
+}
+
+/* Team page */
+.team-list .team-item .block-grid-inner {
+    top: 85%;
+   background-image: linear-gradient(rgba(1, 162, 218, 0.74), rgba(242, 242, 242, 0.46));
+}
+.team-list .team-item .block-grid-image {
+    border-radius: 15px;
+    overflow: hidden;
+}
+.team-list .team-item .title {
+    line-height: 1.2;
+}
+.team-list .block-grid-item.fourth-one .button {
+    display: none;
+    margin-top: 15px;
+    line-height: 2em;
+}
+.block-grid-item a:hover .block-grid-inner {
+    top: 55%;
+}
+
+/* Single Team */
+.single-team article .size-post-thumbnail {
+    border-radius: 15px;
+    padding: 27px 25px;
+    background-image: linear-gradient(29deg, rgba(1, 162, 218, 0.12), rgba(242, 242, 242, 0.57));
+    width: 260px;
+}
+.single-team article .entry-content-inner img {
+    width: 90px;
+    border: 1px solid #01a2da;
+    border-radius: 10px;
+    margin: 5px 0 25px 25px;
+}
+.single-team article .entry-content-inner {
+    padding: 25px 0;
+}
+.teams-img .wp-block-column {
+    border-radius: 15px;
+    padding: 27px 25px;
+    background-image: linear-gradient(29deg, rgba(1, 162, 218, 0.12), rgba(242, 242, 242, 0.57));
+}
+.teams-img .wp-block-image.size-full, .teams-img img {
+    margin: 0;
+}
+.teams-img img{
+     border-radius: 15px;
+}
+.teams-img {
+    margin-top: 30px;
+}
+
+/* Prevent footer overlay issues — keep footer in normal flow */
+.footer-section, #colophon, .site-footer{
+  position: static;
+  clear: both;
+}
+
+
+
+/* ===== Tabbed forms (used by [hb_form_tabs]) ===== */
+.hb-tab-container{ margin-top: 20px; }
+.hb-tab-buttons{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.hb-tab-buttons .hb-tab-btn{
+  background: #0073aa;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background .25s ease;
+}
+.hb-tab-buttons .hb-tab-btn:hover{ background:#006799; }
+.hb-tab-buttons .hb-tab-btn.active{ background:#005177; }
+
+.hb-tab-content{ display:none; }
+.hb-tab-content.active{ display:block; }
+
+/* Social icons you already had */
+.social-icon-new {
+  background-color: #fff;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  top: 0 !important;
+  position: relative;
+  display: inline-block;
+}
+.social-icon-new::before {
+  font-family: FontAwesome;
+  color: #143b48;
+  font-size: 14px;
+  text-align: center !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.social-icon-new:hover{ background-color:#00A3DA !important; }
+.instagram-icon::before{ content:"\f16d"; }
+.youtube-icon::before{ content:"\f16a"; }
+
+/* ===== Responsive tweaks ===== */
+@media screen and (min-width: 767px) {
+    .single-step-box, .team-list .team-item {
+        width: calc(33.33% - 70px);
+    }
+   .single-step-box:nth-child(3n), 
+   .team-list .team-item:nth-child(3n) {
+    margin-right: 0;
+    }
+    .single-step-box:nth-child(3n+1), 
+    .team-list .team-item:nth-child(3n+1) {
+        margin-left: 0;
+    }
+/* Service page */
+     .service-list .grid-block-item {
+        width: calc(25% - 73px);
+    }
+    .service-list .grid-block-item:nth-child(4n+1) {
+    margin-left: 0;
+}
+    .service-list .grid-block-item:nth-child(4n){
+        margin-right: 0;
+    }
+}
+
+
+@media (max-width: 1280px){
+  .clinic-list .block-grid-title .title, .clinic-list a:hover .block-grid-title .title {
+    font-size: 17px;
+}
+}
+@media (max-width: 991px){
+  :root{ --heroOverlayH: 26vh; --heroHeight: 92vh; }
+  .clinic-list .block-grid-title .title, .clinic-list a:hover .block-grid-title .title {
+    font-size: 16px;
+    line-height: normal;
+}
+.clinic-list .block-grid-title {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.clinic-list .block-grid-title .title {
+    padding: 9px 0;
+}
+.clinic-list .address, .clinic-list .opening-hours {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+.clinic-list .block-grid-title .button {
+    padding: 5px 8px;
+}
+}
+@media (max-width: 767px){
+  :root{ --heroOverlayH: 32vh; --heroHeight: 100vh; }
+    .home-hero {
+        min-height: 530px;
+        background-position: 46% -2%;
+        /* height: 1000px; */
+        background-repeat: no-repeat;
+        height: auto;
+        background-size: 115%;
+        background-color: #d4dde8;
+}
+.home-hero p {
+    color: #194C5A;
+}
+  body .home-hero .overlay {
+    padding: 20px 6px;
+  }
+  body .footer-section {
+    padding-top: 15px !important;
+    padding-bottom: 15px;
+  }
+  .footer-section .copyrights {
+    line-height: 1.4;
+}
+    .block-grid-item.third-one {
+        width: 48%;
+    }
+    .clinic-list .block-grid-item:first-child {
+    padding-right: 3%;
+}
+.clinic-list .address, .clinic-list .opening-hours {
+    margin-bottom: 10px;
+}
+
+/* Single Clinics */
+.single-clinic article .entry-content > p {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Single team */
+.single-team .main-content .entry-content > p:first-child {
+    float: none;
+}
+.single-step-box:nth-child(2n), .team-list .team-item:nth-child(2n),
+.service-list .grid-block-item:nth-child(2n) {
+    margin-right: 0;
+}
+.single-step-box, .team-list .team-item, .service-list .grid-block-item {
+    width: calc(50% - 65px);
+}
+.single-step-box:nth-child(2n-1), .team-list .team-item:nth-child(2n-1),
+.service-list .grid-block-item:nth-child(2n-1) {
+    margin-left: 0;
+}
+.service-list .grid-block-item .video-title {
+    min-height: 18px;
+}
+}
+
+
+@media (max-width: 576px){
+    .block-grid-item.third-one {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .block-grid-item.third-one img {
+    width: 100%;
+}
+.clinic-list .block-grid-title .title, .clinic-list a:hover .block-grid-title .title {
+  font-size: 18px;
+  line-height: normal;
+}
+    .clinic-list .address, .clinic-list .opening-hours {
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+/* Contact form */
+.form-style .tab-container .tab-content form .ff-el-form-check {
+    margin-bottom: 0;
+    width: 50% !important;
+}
+
+/* Patient form */
+.patient-form form .ff-el-group .ff-el-input--content .ff-el-form-check {
+    width: 50% !important;
+}
+.home-hero h2 {
+    font-size: 22px;
+    color: #01a2da;
+}
+}
+@media (max-width: 480px){
+  .clinic-info.clinic-opening-time, .clinic-info.getting-here {
+    padding: 15px 20px;
+}
+.single-clinic article .entry-content > p > a {
+    text-align: center;
+    width: 100%;
+}
+.single-clinic article .entry-content > p > a img {
+    float: none;
+    margin-left: 0;
+}
+.single-service article .entry-content p img {
+    float: none;
+    display: block;
+}
+/* Contact form */
+.form-style .tab-container .tab-content form .ff-el-form-check {
+    margin-bottom: 0;
+    width: 100% !important;
+}
+.patient-form form .ff-el-group .ff-el-input--content .ff-el-form-check {
+    width: 100% !important;
+}
+.form-style .tab-container .tab-buttons .tab-btn {
+  width: 100%;
+}
+    .single-step-box {
+        width: 100%;
+    }
+    .step-box-outer .single-step-box, .team-list .team-item, .service-list .grid-block-item 
+ {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .video-title {
+        font-size: 16px;
+        min-height: 45px;
+    }
+}
+@media (max-width: 458px){
+  .service-list .centering {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+.service-list .centering .block-grid-title {
+    font-size: 1.4em;
+}
+}
+@media (max-width: 414px){
+.single-team article .entry-content .entry-content-inner > p > a img {
+    float: right;
+}
+}
