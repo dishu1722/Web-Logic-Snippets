@@ -25,3 +25,71 @@ document.addEventListener('DOMContentLoaded', function() {
         swiperWrapper.style.transform = 'translateX(0)';
     }
 });
+
+// Changing the logo and Background on scroll
+document.addEventListener('DOMContentLoaded', function() {
+  const header = document.querySelector('.header-scroll');
+  const logoImg = document.querySelector('.header-scroll .elementor-widget-theme-site-logo img');
+	
+  const logoLight = 'https://new.44moles.com/wp-content/uploads/2026/02/Logo-light-gradient-scaled.png';
+  const logoDark = 'https://new.44moles.com/wp-content/uploads/2026/04/Logo-dark-gradient-scaled-1.png';
+  
+  if (header) {
+    const bgLayer = document.createElement('div');
+    bgLayer.className = 'header-bg-layer';
+    
+    Object.assign(bgLayer.style, {
+      position: 'absolute',
+      top: '0',
+      left: '50%',              
+      transform: 'translateX(-50%)', 
+      width: '730px',             
+      height: '100%',
+      backgroundColor: '#ffffff', 
+      opacity: '0',
+      transition: 'opacity 0.3s ease',
+      zIndex: '-1',
+      borderRadius: '6.25rem'   // Creates the rounded "pill" ends
+    });
+
+    // Parent header adjustments
+    header.style.position = 'fixed'; 
+    header.style.width = '100%';
+    header.style.left = '0';
+    header.style.zIndex = '999';
+
+    header.prepend(bgLayer);
+
+    const updateWidth = () => {
+      if (window.innerWidth < 1025) {
+        bgLayer.style.width = '630px'; // Wider on tablet (less than 1025px)
+      } 
+	  if (window.innerWidth < 768) {
+        bgLayer.style.width = '96%'; // Wider on mobile (less than 768px)
+      } 
+    };
+
+    // Initialize width on load
+    updateWidth();
+
+    window.addEventListener('scroll', function() {
+  const isScrolled = window.scrollY > 10;
+
+  bgLayer.style.opacity = isScrolled ? '1' : '0';
+  header.classList.toggle('hdr-change', isScrolled);
+
+  if (logoImg) {
+    if (isScrolled) {
+      logoImg.src = logoDark;
+      logoImg.srcset = logoDark; 
+    } else {
+      logoImg.src = logoLight;
+      logoImg.srcset = logoLight; 
+    }
+  }
+});
+
+    // Update width if window is resized
+    window.addEventListener('resize', updateWidth);
+  }
+});
