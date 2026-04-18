@@ -93,3 +93,28 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', updateWidth);
   }
 });
+
+// Hiding the logo when scrolled up and show when scrolled down in Mobile
+let lastScrollTop = 0;
+const header = document.querySelector(".header-move");
+
+window.addEventListener("scroll", function() {
+  // Only run if the screen width is 1024px or less
+  if (window.innerWidth <= 1024) {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      // User is scrolling down
+      header.classList.add("header-up");
+    } else {
+      // User is scrolling up
+      header.classList.remove("header-up");
+    }
+
+    // Update lastScrollTop, catching the "bounce" on mobile browsers
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  } else {
+    // Safety: ensure header is visible if user resizes window to desktop
+    header.classList.remove("header-up");
+  }
+}, false);
