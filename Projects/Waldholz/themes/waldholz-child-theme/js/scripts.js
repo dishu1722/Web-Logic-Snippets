@@ -97,3 +97,27 @@ jQuery(document).ready(function($) {
 
     });
 })(jQuery);
+
+
+// Fetching the popup Email Subject through Hidden field
+document.addEventListener('click', function(e) {
+  let btn = e.target.closest('.elementor-widget-button');
+  if (!btn) return;
+
+  // find the parent slider/container
+  let container = btn.closest('.has_eae_slider');
+  if (!container) return;
+
+  // get the property name from the heading
+  let heading = container.querySelector('.elementor-widget-heading .elementor-heading-title');
+  let property = heading ? heading.textContent.trim() : '';
+
+  // wait for the popup form to appear
+  setTimeout(() => {
+    let input = document.querySelector('#form-field-property_name');
+    if (input) {
+      input.value = property;
+      console.log('Hidden field set to:', property);
+    }
+  }, 500);
+});
