@@ -75,7 +75,6 @@ function reorder_summary_elements_js() {
     <?php
 }
 
-
 /**
  * 4. Add Delivery Information Section
  */
