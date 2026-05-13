@@ -1,21 +1,19 @@
+<?php 
+// CARE HAMPER PACK Snippet
+
+
 /**
  * 1. Robust check for the category
  */
 function is_care_hamper_layout() {
-    // Add every category slug that should use this special layout
-    $hamper_categories = array(
-        'care-packs', 
-        'diabetic-food-hamper', 
-        'elderly-food-hamper', 
-        'immunity-food-hamper',
-		'recovery-food-hamper',
-    );
-
-    if ( is_product() && has_term( $hamper_categories, 'product_cat' ) ) {
-        return true;
+   // We only want this to run on single product pages
+    if ( ! is_product() ) {
+        return false;
     }
-    
-    return false;
+
+    // Now, we only check for the one category slug you created
+    // Any product she adds to this category in the future works instantly
+    return has_term( 'care-packs', 'product_cat' );
 }
 
 /**
@@ -75,6 +73,7 @@ function reorder_summary_elements_js() {
     <?php
 }
 
+
 /**
  * 4. Add Delivery Information Section
  */
@@ -111,18 +110,18 @@ function add_hamper_delivery_section() {
 <!-- Delivery Info Block  -->
 		
     <div class="hamper-delivery-info">
-        <h4>Delivery</h4>
+        <h4><?php echo esc_html(get_field('delivery_title') ?: 'Delivery'); ?></h4>
 		<div class="del-outer">
 			<div class="del-row">
 				<span class="elementor-icon elementor-animation-rotate">
 				<i aria-hidden="true" class="fibd21- fi-bd21-delivery-2"></i>				
 				</span> 
-				<div><strong>We deliver across Zimbabwe</strong><br>Reliable, safe & on time.					</div>		
+				<div><strong><?php echo esc_html(get_field('delivery_location')); ?></strong><br><?php echo esc_html(get_field('location_subtext')); ?>					</div>		
 			</div>
 			<div class="del-row"><span class="elementor-icon">
-					<i aria-hidden="true" class="fibd21- fi-bd21-time"></i>				</span> <div>Same or next-day delivery (Mon-Sat)</div></div>
+					<i aria-hidden="true" class="fibd21- fi-bd21-time"></i>				</span> <div><?php echo esc_html(get_field('delivery_time')); ?></div></div>
 			<div class="del-row"><span class="elementor-icon elementor-animation-rotate">
-					<i aria-hidden="true" class="fib154- fi-b154-heart-circled"></i>				</span> <div>Delivered with care, just like you would</div></div>
+					<i aria-hidden="true" class="fib154- fi-b154-heart-circled"></i>				</span> <div><?php echo esc_html(get_field('delivery_care_note')); ?></div></div>
 		</div>
    </div>
     <?php
