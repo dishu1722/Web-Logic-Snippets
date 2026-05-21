@@ -57,7 +57,7 @@ function checkout_custom_frontend_tweaks() {
                 if ($('#custom_receiver_details_section').length === 0) {
                     var receiverFieldsHtml = `
                         <div id="custom_receiver_details_section" class="c-cart__form" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e5e5; clear: both; width: 100%;">
-                            <h3 class="c-cart__header title-renamed" style="font-size: 1.4em; margin-bottom: 15px; color: #243f2f;">Receiver Details (in Zimbabwe) <span style="width: 25px; display: inline-block;">💚</span></h3>
+                            <h3 class="c-cart__header title-renamed" style="font-size: 1.4em; margin-bottom: 15px; color: #243f2f;">Recipient Details (in Zimbabwe) <span style="width: 25px; display: inline-block;">💚</span></h3>
                             
                             <div class="receiver-row" style="display: flex; gap: 15px; flex-wrap: wrap;">
                                 <p class="form-row form-row-first validate-required" style="flex: 1; min-width: 200px; margin-bottom: 15px;">
@@ -151,7 +151,7 @@ function checkout_custom_frontend_tweaks() {
 }
 
 /**
- * BACKEND CHECKS & META ATTACHMENTS
+ * 6. BACKEND FIELD VALIDATION
  */
 add_action( 'woocommerce_checkout_process', 'validate_receiver_details_fields' );
 function validate_receiver_details_fields() {
@@ -169,18 +169,46 @@ function validate_receiver_details_fields() {
     }
 }
 
-add_action( 'woocommerce_checkout_update_order_meta', 'save_receiver_details_meta_records' );
-function save_receiver_details_meta_records( $order_id ) {
+/**
+ * 7. BULLETPROOF ORDER SAVE ENGINE (Saves directly to Order Object & Metadata)
+ */
+add_action( 'woocommerce_checkout_create_order', 'save_receiver_details_to_order_object', 10, 2 );
+function save_receiver_details_to_order_object( $order, $data ) {
     if ( ! empty( $_POST['receiver_full_name'] ) ) {
-        update_post_meta( $order_id, 'Receiver Full Name', sanitize_text_field( $_POST['receiver_full_name'] ) );
+        $order->update_meta_data( 'Receiver Full Name', sanitize_text_field( $_POST['receiver_full_name'] ) );
     }
     if ( ! empty( $_POST['receiver_phone_number'] ) ) {
-        update_post_meta( $order_id, 'Receiver Phone Number', sanitize_text_field( $_POST['receiver_phone_number'] ) );
+        $order->update_meta_data( 'Receiver Phone Number', sanitize_text_field( $_POST['receiver_phone_number'] ) );
     }
     if ( ! empty( $_POST['receiver_delivery_address'] ) ) {
-        update_post_meta( $order_id, 'Receiver Address', sanitize_text_field( $_POST['receiver_delivery_address'] ) );
+        $order->update_meta_data( 'Receiver Address', sanitize_text_field( $_POST['receiver_delivery_address'] ) );
     }
     if ( ! empty( $_POST['receiver_city_suburb'] ) ) {
-        update_post_meta( $order_id, 'Receiver City/Suburb', sanitize_text_field( $_POST['receiver_city_suburb'] ) );
+        $order->update_meta_data( 'Receiver City/Suburb', sanitize_text_field( $_POST['receiver_city_suburb'] ) );
+    }
+}
+
+/**
+ * 8. DISPLAY RECEIVER DETAILS NATIVELY IN THE BACKEND EDIT ORDER SCREEN
+ * This injects the data beautifully right onto the screen you showed in your screenshot
+ */
+add_action( 'woocommerce_admin_order_data_after_shipping_address', 'display_receiver_details_in_admin_order_screen' );
+function display_receiver_details_in_admin_order_screen( $order ) {
+    // Pull metadata keys using the modern CRUD approach
+    $res_name    = $order->get_meta( 'Receiver Full Name' );
+    $res_phone   = $order->get_meta( 'Receiver Phone Number' );
+    $res_address = $order->get_meta( 'Receiver Address' );
+    $res_suburb  = $order->get_meta( 'Receiver City/Suburb' );
+
+    // If there is data saved, render it under the Shipping block
+    if ( ! empty( $res_name ) || ! empty( $res_address ) ) {
+        echo '<br class="clear" />';
+        echo '<div class="order_receiver_details" style="border-top: 1px dashed #ccc; padding-top: 12px; margin-top: 12px; clear: both;">';
+        echo '<h3 style="font-size: 14px; margin-bottom: 8px; color: #243f2f; display: flex; align-items: center; gap: 5px;">Recipient Details (In Zimbabwe)</h3>';
+        echo '<p style="margin: 3px 0; font-size: 12px;"><strong>Name:</strong> ' . esc_html( $res_name ) . '</p>';
+        echo '<p style="margin: 3px 0; font-size: 12px;"><strong>Phone:</strong> ' . esc_html( $res_phone ) . '</p>';
+        echo '<p style="margin: 3px 0; font-size: 12px;"><strong>Address:</strong> ' . esc_html( $res_address ) . '</p>';
+        echo '<p style="margin: 3px 0; font-size: 12px;"><strong>City/Suburb:</strong> ' . esc_html( $res_suburb ) . '</p>';
+        echo '</div>';
     }
 }
