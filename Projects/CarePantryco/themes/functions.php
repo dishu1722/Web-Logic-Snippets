@@ -1,21 +1,17 @@
+<?php 
+
 /**
  * 1. Robust check for the category
  */
 function is_care_hamper_layout() {
-    // Add every category slug that should use this special layout
-    $hamper_categories = array(
-        'care-packs', 
-        'diabetic-food-hamper', 
-        'elderly-food-hamper', 
-        'immunity-food-hamper',
-		'recovery-food-hamper',
-    );
-
-    if ( is_product() && has_term( $hamper_categories, 'product_cat' ) ) {
-        return true;
+   // We only want this to run on single product pages
+    if ( ! is_product() ) {
+        return false;
     }
-    
-    return false;
+
+    // Now, we only check for the one category slug you created
+    // Any product she adds to this category in the future works instantly
+    return has_term( 'care-packs', 'product_cat' );
 }
 
 /**
@@ -112,18 +108,18 @@ function add_hamper_delivery_section() {
 <!-- Delivery Info Block  -->
 		
     <div class="hamper-delivery-info">
-        <h4>Delivery</h4>
+        <h4><?php echo esc_html(get_field('delivery_title') ?: 'Delivery'); ?></h4>
 		<div class="del-outer">
 			<div class="del-row">
 				<span class="elementor-icon elementor-animation-rotate">
 				<i aria-hidden="true" class="fibd21- fi-bd21-delivery-2"></i>				
 				</span> 
-				<div><strong>We deliver across Zimbabwe</strong><br>Reliable, safe & on time.					</div>		
+				<div><strong><?php echo esc_html(get_field('delivery_location')); ?></strong><br><?php echo esc_html(get_field('location_subtext')); ?>					</div>		
 			</div>
 			<div class="del-row"><span class="elementor-icon">
-					<i aria-hidden="true" class="fibd21- fi-bd21-time"></i>				</span> <div>Same or next-day delivery (Mon-Sat)</div></div>
+					<i aria-hidden="true" class="fibd21- fi-bd21-time"></i>				</span> <div><?php echo esc_html(get_field('delivery_time')); ?></div></div>
 			<div class="del-row"><span class="elementor-icon elementor-animation-rotate">
-					<i aria-hidden="true" class="fib154- fi-b154-heart-circled"></i>				</span> <div>Delivered with care, just like you would</div></div>
+					<i aria-hidden="true" class="fib154- fi-b154-heart-circled"></i>				</span> <div><?php echo esc_html(get_field('delivery_care_note')); ?></div></div>
 		</div>
    </div>
     <?php
@@ -406,51 +402,90 @@ padding: 10px 12px;
         });
 
 // 3. AJAX Add to Cart (The code you need to add)
-    $(document).on('click', '.ajax_add_to_cart_essentials', function(e) {
-        e.preventDefault(); 
+ $(document).on('click', '.ajax_add_to_cart_essentials', function(e) {
+    e.preventDefault(); 
+    
+    var $button = $(this);
+    // If already added, don't do anything
+    if ($button.hasClass('is-added')) return;
+
+    var product_id = $button.data('product_id');
+    var originalText = $button.html();
+
+    // 1. Immediate visual feedback
+    $button.text('Adding...').prop('disabled', true);
+
+    $.ajax({
+        type: 'POST',
+        url: wc_add_to_cart_params.ajax_url, 
+        data: {
+            'action': 'woocommerce_add_to_cart',
+            'product_id': product_id,
+            'quantity': 1
+        }
+    }).always(function(response) {
+        // 2. The "always" block runs NO MATTER WHAT (Success or Error)
+        // This stops the "Adding..." hang permanently.
         
-        var $button = $(this);
-        var product_id = $button.data('product_id');
-        var originalText = $button.html();
+        // Update the cart fragments so the header count stays accurate
+        if (response && response.fragments) {
+            $(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $button]);
+        }
 
-        $button.text('Adding...').prop('disabled', true);
-
-        $.ajax({
-            type: 'POST',
-            url: wc_add_to_cart_params.ajax_url, 
-            data: {
-                'action': 'woocommerce_add_to_cart',
-                'product_id': product_id,
-                'quantity': 1
-            },
-            success: function(response) {
-                if (response.error && response.product_url) {
-                    window.location = response.product_url;
-                    return;
-                }
-
-                // Updates the header cart count/total automatically
-                $(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $button]);
-                
-                // Visual feedback: button turns green
-                $button.text('Added!').css({
-                    'background-color': '#06aa64', 
-                    'color': '#fff',
-                    'border-color': '#06aa64'
-                });
-                
-                // Reset button after 2 seconds
-                setTimeout(function() {
-                    $button.html(originalText).prop('disabled', false).css({
-                        'background-color': '#fff', 
-                        'color': '#06aa64',
-                        'border-color': '#06aa64'
-                    });
-                }, 2000);
-            }
-        });
+        // 3. Flip the UI to the permanent "Added" state
+        renderPermanentState($button, originalText);
     });
+});
 
+function renderPermanentState($btn, oldText) {
+    if ($btn.hasClass('main-package-btn')) {
+        // 1. Hide the qty selector to make room
+        $('.sticky-qty-selector').hide();
+
+        // 2. Define the two-button layout
+        var actionHtml = `
+            <div class="sticky-post-add-actions" style="display: flex; gap: 8px; width: 100%;">
+                <button type="button" class="btn-continue-essentials" style="flex: 1; background-color: transparent; color: #243f2f; border: 2px solid #243f2f; padding: 12px 5px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 5px; text-transform: uppercase;">
+                   <span>🛒</span> Continue Shopping
+                </button>
+                <a href="/cart/" class="btn-go-checkout" style="flex: 1; background: #243f2f; color: #fff; border: 2px solid #243f2f; padding: 12px 5px; border-radius: 8px; font-weight: 700; text-decoration: none; text-align: center; text-transform: uppercase; display: flex; justify-content: center; align-items: center;">
+                    Checkout →
+                </a>
+            </div>
+        `;
+
+        // 3. Swap the button
+        $btn.replaceWith(actionHtml);
+
+    } else {
+        // This handles the small +Add buttons inside the modal
+        $btn.addClass('is-added')
+            .text('Added')
+            .prop('disabled', true)
+            .css({
+                'background-color': '#06aa64', 
+                'color': '#fff',
+                'border-color': '#06aa64',
+                'cursor': 'default',
+                'opacity': '1'
+            });
+    }
+}
+
+// This "watcher" stays active at all times
+$(document).on('click', '.btn-continue-essentials', function(e) {
+    e.preventDefault();
+    
+    // Look for your specific View More link and click it
+    var modalTrigger = document.getElementById('openEssentialsPopup');
+    
+    if (modalTrigger) {
+        modalTrigger.click(); 
+    } else {
+        // Backup: in case ID is slightly different
+        $('#openEssentialsPopup').click();
+    }
+});
 
 
         // Mouse Drag-to-Scroll
@@ -473,11 +508,18 @@ jQuery(document).ready(function($) {
     var currentPage = 1;
     var $scrollContainer = $('#essentialsContent'); 
 
-    // Handle Tab Swapping: Reset pagination when user clicks a new category
+    // Handle Tab Swapping
     $('.tab-item').on('click', function() {
+        // 1. Reset variables for the new category
         currentPage = 1;
         canLoadMore = true;
-        $scrollContainer.scrollTop(0); // Scroll back to top for new category
+        
+        // 2. Clear any "No more products" messages or loaders from panels
+        $('.ess-no-more').remove();
+        $('#ess-loader').remove();
+        
+        // 3. Reset scroll position
+        $scrollContainer.scrollTop(0); 
     });
 
     $scrollContainer.on('scroll', function() {
@@ -485,16 +527,15 @@ jQuery(document).ready(function($) {
         var innerHeight = $scrollContainer.innerHeight();
         var scrollHeight = $scrollContainer[0].scrollHeight;
 
-        // Trigger when 150px from bottom (slightly earlier for smoother mini-card loading)
         if (scrollTop + innerHeight >= scrollHeight - 150) {
             if (canLoadMore) {
-                canLoadMore = false; // Lock loading
+                canLoadMore = false; 
                 currentPage++;
                 
                 var activeCat = $('.tab-item.active').data('cat');
 
-                // Add loader at the bottom of the active panel
-                $('.cat-panel:visible').append('<div id="ess-loader" style="width:100%; text-align:center; padding:15px; color:#06aa64; font-weight:700;">Loading...</div>');
+                // Loader with grid-column fix
+                $('.cat-panel:visible').append('<div id="ess-loader" style="grid-column: 1 / -1; text-align:center; padding:15px; color:#06aa64; font-weight:700;">Loading...</div>');
 
                 $.ajax({
                     url: "<?php echo admin_url('admin-ajax.php'); ?>",
@@ -505,17 +546,45 @@ jQuery(document).ready(function($) {
                         category: activeCat
                     },
                     success: function(data) {
-                        $('#ess-loader').remove();
-                        
-                        if (data.trim() !== "") {
-                            // Append the new mini-cards to the visible category panel
-                            $('.cat-panel:visible').append(data);
-                            canLoadMore = true; // Unlock for next page
-                        } else {
-                            // No more products left in this category
-                            canLoadMore = false;
-                        }
-                    },
+    $('#ess-loader').remove();
+    
+    if (data.trim() !== "") {
+        // 1. Convert the response string into a jQuery object
+        var $newData = $(data);
+        
+        // 2. FORCE IMAGES TO LOAD: Strip lazy attributes and set eager loading
+        $newData.find('img').each(function() {
+            var $img = $(this);
+            
+            // Remove native lazy loading
+            $img.attr('loading', 'eager'); 
+            
+            // Handle common plugin lazy load attributes (LiteSpeed, Smush, etc.)
+            var lazySrc = $img.attr('data-src') || $img.attr('data-lazy-src') || $img.attr('data-orig-src');
+            if (lazySrc) {
+                $img.attr('src', lazySrc);
+                $img.removeAttr('data-src data-lazy-src data-orig-src');
+            }
+
+            // Remove any hidden/opacity classes some plugins add
+            $img.removeClass('lazyload lazyloading').css('opacity', '1');
+        });
+
+        // 3. Append the "cleaned" data to the visible panel
+        $('.cat-panel:visible').append($newData);
+        
+        // 4. Trigger universal "new content" events for other plugins
+        $(document.body).trigger('post-load');
+        $(window).trigger('resize'); // Sometimes triggers lazy loaders to re-check
+        
+        canLoadMore = true; 
+    } else {
+        canLoadMore = false;
+        if ($('.cat-panel:visible .ess-no-more').length === 0) {
+            $('.cat-panel:visible').append('<div class="ess-no-more" style="grid-column: 1 / -1; text-align:center; padding:10px; font-size:12px; color:#999;">No more products in this category.</div>');
+        }
+    }
+},
                     error: function() {
                         $('#ess-loader').remove();
                         canLoadMore = true;
@@ -638,37 +707,106 @@ function render_extra_support_system() {
 
 
 /**
- * Redirect specific Hamper categories directly to their product pages
+ * Flash-Free Universal Hamper/Service Redirect Engine
+ * Instantly hides the category view so the user never sees it before the redirect kicks in.
  */
-add_action( 'template_redirect', 'redirect_hamper_categories_to_products' );
-function redirect_hamper_categories_to_products() {
-    // 1. Check if we are on a product category page
-    if ( is_product_category() ) {
-        $queried_object = get_queried_object();
-        $slug = $queried_object->slug;
-
-        // 2. Map the category slug to your specific product URL
-        // Replace 'diabetic-food-hamper' with your actual category slug
-        // Replace '/product/diabetic-support-pack/' with your actual product URL
-        if ( $slug === 'diabetic-food-hamper' ) {
-            wp_redirect( home_url( '/shop/diabetic-care-pack/' ) );
-            exit;
-        }
+add_action( 'wp_head', 'invisible_universal_hamper_redirect_engine', 1 );
+function invisible_universal_hamper_redirect_engine() {
+    if ( is_admin() ) return; 
+    ?>
+    <script type="text/javascript">
+    (function() {
+        // 1. Instantly check body classes before the browser paints anything visible
+        var classes = document.documentElement.className || '';
         
-        if ( $slug === 'elderly-food-hamper' ) {
-            wp_redirect( home_url( '/shop/elderly-food-hamper/' ) );
-            exit;
+        // We'll use an interval to catch the body element as early as humanly possible
+        var styleApplied = false;
+        var hidePageStyles = null;
+
+        function injectStyleBlock() {
+            if (!document.body || styleApplied) return;
+            
+            var bodyClasses = document.body.className.split(/\s+/);
+            var isTargetPage = false;
+            
+            for (var i = 0; i < bodyClasses.length; i++) {
+                var cls = bodyClasses[i];
+                if (cls.indexOf('term-') === 0 && (cls.endsWith('-hamper') || cls.endsWith('-service'))) {
+                    isTargetPage = true;
+                    break;
+                }
+            }
+
+            // If it's a hamper/service category, make the screen blank immediately
+            if (isTargetPage) {
+                hidePageStyles = document.createElement('style');
+                hidePageStyles.innerHTML = 'html, body { visibility: hidden !important; background: #ffffff !important; }';
+                document.head.appendChild(hidePageStyles);
+            }
+            styleApplied = true;
         }
- 		if ( $slug === 'recovery-food-hamper' ) {
-            wp_redirect( home_url( '/shop/recovery-support-hamper/' ) );
-            exit;
+
+        // Try injecting style instantly
+        injectStyleBlock();
+
+        function interceptAndRedirect() {
+            var bodyElement = document.body;
+            if (!bodyElement) return false;
+
+            var isHamperOrServicePage = false;
+            var classes = bodyElement.className.split(/\s+/);
+            for (var i = 0; i < classes.length; i++) {
+                var cls = classes[i];
+                if (cls.indexOf('term-') === 0 && (cls.endsWith('-hamper') || cls.endsWith('-service'))) {
+                    isHamperOrServicePage = true;
+                    break;
+                }
+            }
+
+            if (!isHamperOrServicePage) return false;
+
+            // Look for the actual working single product URL on the page
+            var productLinkEl = document.querySelector('.products .product a[href*="/shop/"], .elementor-loop-container a[href*="/shop/"], .product a[href*="/shop/"]');
+            
+            if (productLinkEl && productLinkEl.href) {
+                window.location.replace(productLinkEl.href);
+                return true;
+            }
+            return false;
         }
-		if ( $slug === 'immunity-food-hamper' ) {
-            wp_redirect( home_url( '/shop/immunity-support-hamper/' ) );
-            exit;
-        }
-    }
+
+        // Run checking loop
+        var counter = 0;
+        var checkInterval = setInterval(function() {
+            // Keep trying to apply the invisibility cloak if it hasn't caught yet
+            if (!styleApplied) injectStyleBlock();
+
+            var success = interceptAndRedirect();
+            counter++;
+
+            if (success) {
+                clearInterval(checkInterval);
+            }
+
+            // Safety check: If it's an empty category grid with no products, make the page visible again so it doesn't get stuck blank
+            if (counter > 100) {
+                clearInterval(checkInterval);
+                if (hidePageStyles && hidePageStyles.parentNode) {
+                    hidePageStyles.parentNode.removeChild(hidePageStyles);
+                }
+            }
+        }, 5);
+    })();
+    </script>
+    <?php
 }
+
+
+// Remove the "Product has been added to your cart" message site-wide
+add_filter( 'wc_add_to_cart_message_html', '__return_false' );
+add_filter( 'woocommerce_add_success', '__return_false' );
+add_filter( 'woocommerce_add_notice', '__return_false' );
+add_filter( 'woocommerce_add_error', '__return_false' );
 
 
 // Register the AJAX actions
@@ -676,40 +814,81 @@ add_action('wp_ajax_load_more_essentials', 'load_more_essentials_handler');
 add_action('wp_ajax_nopriv_load_more_essentials', 'load_more_essentials_handler');
 
 function load_more_essentials_handler() {
+    // 1. Get current page and category slug from the AJAX request
     $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $category_slug = isset($_POST['category']) ? sanitize_text_field($_POST['category']) : 'all-groceries';
     
     $args = array(
-        'status'   => 'publish',
-        'category' => array( 'all-groceries' ), 
-        'limit'    => 12, 
-        'page'     => $paged,
-        'paginate' => true,
+        'post_type'        => 'product',
+        'post_status'      => 'publish',
+        'posts_per_page'   => 12,
+        'paged'            => $paged,
+        'orderby'          => 'menu_order', 
+        'order'            => 'ASC',
+        'suppress_filters' => false, 
+        'tax_query'        => array(
+            array(
+                'taxonomy'         => 'product_cat',
+                'field'            => 'slug',
+                'terms'            => $category_slug, 
+                'operator'         => 'IN',
+                'include_children' => ($category_slug === 'all-groceries') ? true : false, 
+            ),
+        ),
     );
 
-    $products_data = wc_get_products($args);
+    $query = new WP_Query($args);
     
-    if (!empty($products_data->products)) {
-        foreach ($products_data->products as $product) {
-            // Get product details
-            $id = $product->get_id();
-            $image = wp_get_attachment_image_url($product->get_image_id(), 'thumbnail');
-            $title = $product->get_name();
-            $price = $product->get_price_html();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $product = wc_get_product(get_the_ID());
+            
+            $id      = get_the_ID();
+            $img_id  = $product->get_image_id();
+            $img     = $img_id ? wp_get_attachment_image_url($img_id, 'thumbnail') : wc_placeholder_img_src();
+            $title   = get_the_title();
+            $price   = $product->get_price_html();
 
-            // NEW POPUP-SPECIFIC HTML STRUCTURE
+            // --- CHECK IF IN CART ---
+           // --- DEEP SCAN CART CHECK ---
+$is_in_cart = false;
+
+if ( function_exists('WC') && !empty(WC()->cart) ) {
+    // Get all product IDs currently in the cart
+    $cart_ids = wp_list_pluck( WC()->cart->get_cart(), 'product_id' );
+    
+    // Check if current ID or its Variation ID is in that list
+    if ( in_array($id, $cart_ids) ) {
+        $is_in_cart = true;
+    }
+}
             ?>
             <div class="ess-card-mini">
-                <img src="<?php echo esc_url($image); ?>" style="width: 55px; height: auto; border-radius: 8px;">
- <div style="flex: 1;">
-               <h4 style="font-size: 13px; margin: 0; font-weight: 500; color: #333;"><?php echo esc_html($title); ?></h4>
-                 <p style="font-weight: 700; margin: 3px 0; font-size: 14px; color: #000;"><?php echo $price; ?></p>
-               <button type="button" class="ajax_add_to_cart_essentials" data-product_id="<?php echo $id; ?>" style="color: #06aa64; font-size: 12px; font-weight: 700; border: 1px solid #06aa64; padding: 4px 12px; border-radius: 6px; margin: 4px 0; display: inline-block; background-color: #fff; cursor: pointer;">
-                     + Add
-</button>
+                <img src="<?php echo esc_url($img); ?>" style="width: 55px; height: auto; border-radius: 8px;" loading="eager">
+                <div style="flex: 1;">
+                    <h4 style="font-size: 13px; margin: 0; font-weight: 500; color: #333;"><?php echo esc_html($title); ?></h4>
+                    <p style="font-weight: 700; margin: 3px 0; font-size: 14px; color: #000;"><?php echo $price; ?></p>
+                    
+                    <?php if ( $is_in_cart ) : ?>
+                        <button type="button" class="ajax_add_to_cart_essentials is-added" 
+                                data-product_id="<?php echo $id; ?>" 
+                                disabled 
+                                style="background-color: #06aa64; color: #fff; font-size: 12px; font-weight: 700; border: 1px solid #06aa64; padding: 4px 12px; border-radius: 6px; margin: 4px 0; display: inline-block; cursor: default; opacity: 1;">
+                            Added
+                        </button>
+                    <?php else : ?>
+                        <button type="button" class="ajax_add_to_cart_essentials" 
+                                data-product_id="<?php echo $id; ?>" 
+                                style="color: #06aa64; font-size: 12px; font-weight: 700; border: 1px solid #06aa64; padding: 4px 12px; border-radius: 6px; margin: 4px 0; display: inline-block; background-color: #fff; cursor: pointer;">
+                            + Add
+                        </button>
+                    <?php endif; ?>
+                </div>
             </div>
-</div>
             <?php
         }
+        wp_reset_postdata();
     }
     wp_die(); 
 }
@@ -737,6 +916,20 @@ function hide_hamper_features_instantly() {
     }
 }
 
+
+// Check if product is already in cart before adding
+add_filter( 'woocommerce_add_to_cart_validation', 'prevent_duplicate_care_package', 10, 3 );
+function prevent_duplicate_care_package( $passed, $product_id, $quantity ) {
+    // You can add a check here if it's a specific category or ID
+    foreach( WC()->cart->get_cart() as $cart_item ) {
+        if( $cart_item['product_id'] == $product_id ) {
+            wc_add_notice( 'This package is already in your selection.', 'notice' );
+            return false;
+        }
+    }
+    return $passed;
+}
+
 add_filter( 'body_class', 'add_hamper_body_class' );
 function add_hamper_body_class( $classes ) {
     
@@ -754,7 +947,19 @@ function render_care_pantry_sticky_atc() {
     // Only show for the specific Care Hampers categories
     if ( !is_care_hamper_layout() ) return;
 
-    global $product;
+global $product;
+    $package_id = get_the_ID(); 
+    $in_cart = false;
+
+    // Check if product is already in the cart
+    if ( WC()->cart ) {
+        foreach ( WC()->cart->get_cart() as $cart_item ) {
+            if ( $cart_item['product_id'] == $package_id ) {
+                $in_cart = true;
+                break;
+            }
+        }
+    }
     ?>
     <div class="care-sticky-atc-bar">
         <div class="sticky-bar-content">
@@ -771,7 +976,7 @@ function render_care_pantry_sticky_atc() {
                     <input type="number" class="sticky-qty-input" value="1" min="1">
                     <button type="button" class="sticky-qty-btn plus">+</button>
                 </div>
-                <button type="button" class="sticky-submit-button">
+                <button type="button" class="sticky-submit-button ajax_add_to_cart_essentials main-package-btn" data-product_id="<?php echo get_the_ID(); ?>">
                     <span>SEND THIS CARE PACKAGE</span> 🤍
                 </button>
             </div>
@@ -779,24 +984,47 @@ function render_care_pantry_sticky_atc() {
     </div>
 
     <script>
-    jQuery(document).ready(function($) {
-        // Sync Sticky Qty buttons
-        $('.sticky-qty-btn.plus').on('click', function() {
+   jQuery(document).ready(function($) {
+        // Handle Qty Sync
+        $(document).on('click', '.sticky-qty-btn.plus', function() {
             let input = $('.sticky-qty-input');
             input.val(parseInt(input.val()) + 1);
         });
-        $('.sticky-qty-btn.minus').on('click', function() {
+        
+        $(document).on('click', '.sticky-qty-btn.minus', function() {
             let input = $('.sticky-qty-input');
             if (parseInt(input.val()) > 1) input.val(parseInt(input.val()) - 1);
         });
 
-        // Trigger the real WooCommerce Add to Cart button
-        $('.sticky-submit-button').on('click', function() {
+        // Trigger the Main Button Click
+        // This ensures the AJAX script we wrote earlier handles the "View Cart" swap
+        $(document).on('click', '.sticky-submit-button:not(.view-cart-active)', function() {
             let qty = $('.sticky-qty-input').val();
-            $('form.cart input.qty').val(qty); // Update main qty input
-            $('form.cart .single_add_to_cart_button').click(); // Click main ATC
+            $('form.cart input.qty').val(qty); 
+            // Note: If you're using our custom AJAX script, 
+            // the main script handles the transformation.
         });
+
+$(document).on('click', '.btn-continue-essentials', function(e) {
+    e.preventDefault();
+    
+    // 1. Check if the modal is already in the DOM and open it
+    // Replace '.care-essentials-modal' with your actual modal class or ID
+    if ($('.care-essentials-modal').length) {
+        $('.care-essentials-modal').fadeIn(); // Or .addClass('is-active')
+    } else {
+        // 2. If the modal is triggered by a specific button click, trigger that button
+        // Replace '.main-package-btn' with your modal's trigger class
+        $('.main-package-btn').first().click();
+    }
+    
+    // Optional: Smooth scroll back to the top of the modal/essentials section
+    $('html, body').animate({
+        scrollTop: $(".essentials-section").offset().top - 100
+    }, 500);
+});
     });
+  
     </script>
     <?php
 }
